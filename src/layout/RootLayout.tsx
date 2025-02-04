@@ -1,10 +1,15 @@
-import { Outlet } from "react-router-dom";
+import { pageTitle } from "@/utils";
+import { Outlet, useLocation } from "react-router";
 
 export function RootLayout() {
+  const location = useLocation();
+
   return (
-    <div className="w-[1180px] min-h-screen flex flex-col items-center justify-start gap-5 mt-5 mx-auto">
-      <h1 className="text-center font-semibold text-2xl">QUIZ MAKER</h1>
-      <div className="flex w-full gap-2">
+    <div className="w-[1180px] min-h-screen flex flex-col items-center justify-start gap-5 pt-5 mx-auto">
+      <h1 className="text-center font-semibold text-2xl">
+        {pageTitle.find((item) => item.path === location.pathname)?.title}
+      </h1>
+      <div className="flex flex-col w-full gap-5">
         <Outlet />
       </div>
     </div>
