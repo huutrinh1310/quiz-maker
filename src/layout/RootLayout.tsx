@@ -5,7 +5,7 @@ export function RootLayout() {
   const location = useLocation();
 
   return (
-    <div className="w-[1180px] min-h-screen flex flex-col items-center justify-start gap-5 pt-5 mx-auto">
+    <div className="w-[1180px] min-h-screen flex flex-col items-center justify-start gap-5 pt-20 mx-auto">
       <h1 className="text-center font-semibold text-2xl">
         {pageTitle.find((item) => item.path === location.pathname)?.title}
       </h1>
