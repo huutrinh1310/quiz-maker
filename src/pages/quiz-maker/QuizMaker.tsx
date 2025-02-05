@@ -149,6 +149,7 @@ export function QuizMaker() {
             variant={isPending ? "secondary" : "default"}
             type={"submit"}
             disabled={isPending}
+            id={"createBtn"}
           >
             Create
           </Button>
