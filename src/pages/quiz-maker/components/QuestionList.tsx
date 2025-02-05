@@ -14,10 +14,7 @@ function QuestionList({ data, isResult }: QuestionListProps) {
       {data?.map((question, index) => (
         <QuestionItem
           key={index}
-          answers={[
-            ...(question.incorrect_answers as string[]),
-            question.correct_answer as string,
-          ]?.sort(() => Math.random() - 0.5)}
+          answers={question.answers as string[]}
           isResult={isResult}
           {...question}
         />

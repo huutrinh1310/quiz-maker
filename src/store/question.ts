@@ -24,11 +24,20 @@ export const useQuestionAnswered = create<QuizStoreState & QuizStoreAction>(
       }));
     },
     resetAnswers: () => {
-      set({ answers: {} });
+      set({ answers: {}, questions: [] });
     },
     questions: [],
     setQuestions: (questions) => {
-      set({ questions });
+      // random the answers in each question
+      const listQuestion = questions.map((question) => {
+        const answers = [question.correct_answer, ...question.incorrect_answers as string[]];
+        const randomAnswers = answers.sort(() => Math.random() - 0.5);
+        return {
+          ...question,
+          answers: randomAnswers,
+        };
+      }) as QuizType[];
+      set({ questions: listQuestion });
     },
   })
 );

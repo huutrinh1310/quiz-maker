@@ -1,3 +1,4 @@
+import { LoadingSpin } from "@/components/shared/LoadingSpin";
 import { Button } from "@/components/ui/button";
 import { Form, FormField, FormItem } from "@/components/ui/form";
 import {
@@ -8,9 +9,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useToast } from "@/hooks/use-toast";
 import { useQuestionAnswered } from "@/store/question";
-import { QuizType } from "@/type/quiz";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { AxiosError } from "axios";
 import { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
@@ -18,13 +20,10 @@ import { z } from "zod";
 import QuestionList from "./components/QuestionList";
 import { useGetCategory, useMutationCreateQuiz } from "./queries";
 import { quizMakerSchema } from "./utils";
-import { LoadingSpin } from "@/components/shared/LoadingSpin";
-import { AxiosError } from "axios";
-import { useToast } from "@/hooks/use-toast";
 
 export function QuizMaker() {
   const { data, isLoading } = useGetCategory();
-  const { mutate, data: dataCreateQuiz, isPending } = useMutationCreateQuiz();
+  const { mutate, isPending } = useMutationCreateQuiz();
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -32,7 +31,8 @@ export function QuizMaker() {
     resolver: zodResolver(quizMakerSchema),
   });
 
-  const { answers, resetAnswers, setQuestions } = useQuestionAnswered();
+  const { answers, resetAnswers, setQuestions, questions } =
+    useQuestionAnswered();
   const onSubmit = form.handleSubmit((data) => {
     mutate(
       {
@@ -67,8 +67,8 @@ export function QuizMaker() {
   });
 
   const QuestionListCallback = useCallback(() => {
-    return <QuestionList data={dataCreateQuiz?.results as QuizType[]} />;
-  }, [dataCreateQuiz]);
+    return <QuestionList data={questions} />;
+  }, [questions]);
 
   useEffect(() => {
     resetAnswers();

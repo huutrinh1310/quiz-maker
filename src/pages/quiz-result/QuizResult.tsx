@@ -1,13 +1,14 @@
 import { useQuestionAnswered } from "@/store/question";
 import QuestionList from "../quiz-maker/components/QuestionList";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { Button } from "@/components/ui/button";
 import { Home, Plus } from "lucide-react";
 import { useMemo } from "react";
 import { cn } from "@/lib/utils";
 
 export function QuizResult() {
-  const { answers, questions } = useQuestionAnswered();
+  const { answers, questions, resetAnswers } = useQuestionAnswered();
+  const navigate = useNavigate();
 
   const markValue = useMemo(() => {
     return Object.keys(answers).filter(
@@ -42,18 +43,17 @@ export function QuizResult() {
           >
             {markValue} / {questions.length}
           </div>
-          <Link
-            to={"/"}
-            className={"mx-auto"}
+          <Button
+            variant={"secondary"}
+            className={"hover:opacity-80 mt-9 text-xl h-auto mx-auto"}
+            onClick={() => {
+              resetAnswers();
+              navigate("/")
+            }}
           >
-            <Button
-              variant={"secondary"}
-              className={"hover:opacity-80 mt-9 text-xl h-auto"}
-            >
-              <Plus size={30} />
-              Create a new quiz
-            </Button>
-          </Link>
+            <Plus size={30} />
+            Create a new quiz
+          </Button>
         </>
       ) : (
         <div className="flex flex-col gap-4 items-center">

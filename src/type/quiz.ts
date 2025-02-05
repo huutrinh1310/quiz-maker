@@ -21,6 +21,7 @@ export type QuizType = {
   question?: string;
   correct_answer?: string;
   incorrect_answers?: string[];
+  answers?: string[];
 };
 
 export type QuizTypeResponse = {
