@@ -1,13 +1,11 @@
-import { Link, Route, Routes, useLocation } from "react-router";
 import { RootLayout } from "@/layout/RootLayout";
+import { Home } from "lucide-react";
+import { Link, Route, Routes } from "react-router";
+import { Button } from "./components/ui/button";
 import { QuizMaker } from "./pages/quiz-maker/QuizMaker";
 import { QuizResult } from "./pages/quiz-result/QuizResult";
-import { Button } from "./components/ui/button";
-import { Home } from "lucide-react";
 
 function App() {
-  const location = useLocation();
-  alert(location.pathname);
   return (
     <Routes>
       <Route
