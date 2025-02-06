@@ -8,7 +8,7 @@ import { Toaster } from "./components/ui/toaster.tsx";
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
-  <BrowserRouter>
+  <BrowserRouter basename="/quiz-maker">
     <QueryClientProvider client={queryClient}>
       <App />
       <Toaster />
