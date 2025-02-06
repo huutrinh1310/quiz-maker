@@ -6,7 +6,7 @@ import { QuizResult } from "./pages/quiz-result/QuizResult";
 function App() {
   return (
     <Routes>
-      <Route element={<RootLayout />}>
+      <Route path="/" element={<RootLayout />}>
         <Route
           index
           element={<QuizMaker />}
