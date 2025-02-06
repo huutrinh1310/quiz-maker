@@ -1,14 +1,19 @@
-import { Route, Routes } from "react-router";
+import { Route, Routes, useLocation } from "react-router";
 import { RootLayout } from "@/layout/RootLayout";
 import { QuizMaker } from "./pages/quiz-maker/QuizMaker";
 import { QuizResult } from "./pages/quiz-result/QuizResult";
 
 function App() {
+  const location = useLocation();
+  alert(location.pathname);
   return (
     <Routes>
-      <Route path="/" element={<RootLayout />}>
+      <Route
+        path="/"
+        element={<RootLayout />}
+      >
         <Route
-          index
+          path="/"
           element={<QuizMaker />}
         />
         <Route
